@@ -10,5 +10,5 @@ Install PyGame2 per below:
 
 Open Anaconda Prompt, type:
     
-    pip install pygame
+     python3 -m pip install pygame==2.0.0
 
