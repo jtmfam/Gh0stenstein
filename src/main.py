@@ -217,7 +217,7 @@ def main():
             wm.camera.planex = wm.camera.planex * math.cos(rotSpeed) - wm.camera.planey * math.sin(rotSpeed)
             wm.camera.planey = oldPlaneX * math.sin(rotSpeed) + wm.camera.planey * math.cos(rotSpeed)
 
-fps = 1000000
+fps = 32
 class Weapon(object):
     
     def __init__(self, weaponName="shotgun", frameCount = 5):
@@ -296,6 +296,6 @@ class Pinky(object):
                  pinky_bite.play()
                  self.right_left_foot = (self.right_left_foot + 1) % 2
                  self.oldTime = time
-
+#where pinky is in attacking range of player
 if __name__ == '__main__':
     main()
