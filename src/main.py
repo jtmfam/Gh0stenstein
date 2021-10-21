@@ -217,7 +217,7 @@ def main():
             wm.camera.planex = wm.camera.planex * math.cos(rotSpeed) - wm.camera.planey * math.sin(rotSpeed)
             wm.camera.planey = oldPlaneX * math.sin(rotSpeed) + wm.camera.planey * math.cos(rotSpeed)
 
-fps = 32
+fps = 35
 class Weapon(object):
     
     def __init__(self, weaponName="shotgun", frameCount = 5):
