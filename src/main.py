@@ -104,7 +104,7 @@ def main():
                Weapon("chainsaw")
                ]
     weapon_numbers = [K_1,K_2,K_3,K_4,K_5,K_6,K_7,K_8,K_0]
-    weapon = weapons[0]
+    weapon = weapons[6]
     sprite_positions=[
       (20.5, 11.5, 2, 0,  0., 0.,  0), #green light in front of playerstart
       #green lights in every room
@@ -143,8 +143,9 @@ def main():
     foot_time=0.0
     while(True):
         clock.tick(60)
-        
-        wm.draw(screen, sprite_positions + [(q.x, q.y, q.pngNum, q.right_left_foot, q.start_x, q.start_y, q.distance_to_player) for q in pinkies] )
+        sprites_to_draw = sprite_positions + [(q.x, q.y, q.pngNum, q.right_left_foot, q.start_x, q.start_y, q.distance_to_player) for q in pinkies]
+
+        wm.draw(screen, sprites_to_draw )
         
         
         # timing for input and FPS counter
@@ -224,6 +225,10 @@ class Weapon(object):
         self.playing = False
         self.frame = 0
         self.oldTime = 0
+        self.fired = False
+        self.bullet_loc = 0
+        self.bullet_scale = 1
+
         for i in range(frameCount):
             img = pygame.image.load("pics/weapons/%s%s.bmp" % (weaponName, i+1)).convert()
             img = pygame.transform.scale2x(img)
@@ -248,7 +253,21 @@ class Weapon(object):
                         
                 self.oldTime = time
         img = self.images[self.frame]
-        surface.blit(img, (surface.get_width()/2 - img.get_width()/2, surface.get_height()-img.get_height()))
+        # drawing weapon
+        surf_loc = (surface.get_width() / 2 - img.get_width() / 2, surface.get_height() - img.get_height())
+        surface.blit(img, surf_loc)
+        if self.frame+1 == 5:
+            self.fired = True
+
+        if self.fired:
+            (img_x, img_y) = img.get_size()
+            surface.blit(pygame.transform.scale(img, (int(img_x*self.bullet_scale), int(img_y*self.bullet_scale))), (surf_loc[0], surf_loc[1]-self.bullet_loc*10))
+
+            self.bullet_loc+=10
+            self.bullet_scale-=.002
+            if self.bullet_loc == 300:
+                self.fired = False
+                self.bullet_loc = 0
 
 mad_threashold = 5
 class Pinky(object):
