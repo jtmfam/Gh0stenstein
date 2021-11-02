@@ -27,9 +27,10 @@ worldMap =[
   [2,0,0,0,0,0,0,0,2,0,0,0,0,0,2,5,0,5,0,5,0,5,0,5],
   [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5],
   [2,0,0,0,0,0,0,0,2,0,0,0,0,0,2,5,0,5,0,5,0,5,0,5],
-  [2,2,0,0,0,0,0,2,2,2,0,0,0,2,2,0,5,0,5,0,0,0,5,5],
+  [2,2,0,0,0,0,0,2,2,2,0,9,0,2,2,0,5,0,5,0,0,0,5,5],
   [2,2,2,2,1,2,2,2,2,2,2,1,2,2,2,5,5,5,5,5,5,5,5,5]
 ];
+
 
 #worldMap =[
 #  [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
@@ -74,7 +75,8 @@ def load_image(image, darken, colorKey = None):
 
 def main():
   
-    t = time.clock() #time of current frame
+    # t = time.clock() #time of current frame
+    t = time.perf_counter()
     oldTime = 0. #time of previous frame
     pygame.mixer.init()
     #pygame.mixer.music.load("MuseUprising.mp3")
@@ -101,10 +103,12 @@ def main():
                Weapon("plasma"),
                Weapon("rocket"),
                Weapon("bfg"),
-               Weapon("chainsaw")
-               ]
-    weapon_numbers = [K_1,K_2,K_3,K_4,K_5,K_6,K_7,K_8,K_0]
-    weapon = weapons[6]
+               Weapon("chainsaw"),
+               Weapon("katana")]
+    weapon_numbers = [K_1,K_2,K_3,K_4,K_5,K_6,K_7,K_8,K_9,K_0]
+    weapon = weapons[8]
+
+
     sprite_positions=[
       (20.5, 11.5, 2, 0,  0., 0.,  0), #green light in front of playerstart
       #green lights in every room
@@ -151,7 +155,7 @@ def main():
         # timing for input and FPS counter
         
         frameTime = float(clock.get_time()) / 1000.0 # frameTime is the time this frame has taken, in seconds
-        t = time.clock()
+        t = time.perf_counter()
         #text = f.render(str(foot_time), False, (255, 255, 0))
         text = f.render(str(clock.get_fps()), False, (255, 255, 0))
         screen.blit(text, text.get_rect(), text.get_rect())
@@ -216,7 +220,7 @@ def main():
             wm.camera.planex = wm.camera.planex * math.cos(rotSpeed) - wm.camera.planey * math.sin(rotSpeed)
             wm.camera.planey = oldPlaneX * math.sin(rotSpeed) + wm.camera.planey * math.cos(rotSpeed)
 
-fps = 8
+fps = 35
 class Weapon(object):
     
     def __init__(self, weaponName="shotgun", frameCount = 5):
@@ -263,7 +267,7 @@ class Weapon(object):
             (img_x, img_y) = img.get_size()
             surface.blit(pygame.transform.scale(img, (int(img_x*self.bullet_scale), int(img_y*self.bullet_scale))), (surf_loc[0], surf_loc[1]-self.bullet_loc*10))
 
-            self.bullet_loc+=10
+            self.bullet_loc+=1
             self.bullet_scale-=.002
             if self.bullet_loc == 300:
                 self.fired = False
@@ -313,6 +317,6 @@ class Pinky(object):
                  pinky_bite.play()
                  self.right_left_foot = (self.right_left_foot + 1) % 2
                  self.oldTime = time
-
+#where pinky is in attacking range of player
 if __name__ == '__main__':
     main()

@@ -13,6 +13,8 @@ class WorldManager(object):
               load_image(pygame.image.load("pics/items/greenlight.png").convert(), False, colorKey = (0,0,0)),
               load_image(pygame.image.load("pics/items/pinky_l.png").convert(), False, colorKey = (0,0,0)),
               load_image(pygame.image.load("pics/items/pinky_r.png").convert(), False, colorKey = (0,0,0)),
+              load_image(pygame.image.load("pics/items/bullet_gen.png").convert(), False, colorKey=(0, 0, 0)),
+
         ]
         
         self.background = None
