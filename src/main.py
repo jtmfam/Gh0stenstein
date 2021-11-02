@@ -103,10 +103,10 @@ def main():
                Weapon("plasma"),
                Weapon("rocket"),
                Weapon("bfg"),
-               Weapon("chainsaw")
-               ]
-    weapon_numbers = [K_1,K_2,K_3,K_4,K_5,K_6,K_7,K_8,K_0]
-    weapon = weapons[7]
+               Weapon("chainsaw"),
+               Weapon("katana")]
+    weapon_numbers = [K_1,K_2,K_3,K_4,K_5,K_6,K_7,K_8,K_9,K_0]
+    weapon = weapons[8]
     sprite_positions=[
       (20.5, 11.5, 2, 0,  0., 0.,  0), #green light in front of playerstart
       #green lights in every room
