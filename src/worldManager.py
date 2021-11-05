@@ -13,6 +13,8 @@ class WorldManager(object):
               load_image(pygame.image.load("pics/items/greenlight.png").convert(), False, colorKey = (0,0,0)),
               load_image(pygame.image.load("pics/items/pinky_l.png").convert(), False, colorKey = (0,0,0)),
               load_image(pygame.image.load("pics/items/pinky_r.png").convert(), False, colorKey = (0,0,0)),
+              load_image(pygame.image.load("pics/items/bullet_gen.bmp").convert(), False, colorKey=(0, 0, 0)),
+
         ]
         
         self.background = None
@@ -37,6 +39,7 @@ class WorldManager(object):
               ]
         self.camera = Camera(x,y,dirx,diry,planex,planey)
         self.worldMap = worldMap
+
     def draw(self, surface, sprite_positions):
         w = surface.get_width()
         h = surface.get_height()
@@ -188,7 +191,7 @@ class WorldManager(object):
             drawEndX = spriteWidth / 2 + spritesurfaceX
             
             if spriteHeight < 1000:
-                for stripe in range(drawStartX, drawEndX):
+                for stripe in range(int(drawStartX), int(drawEndX)):
                     texX = int(256 * (stripe - (-spriteWidth / 2 + spritesurfaceX)) * texWidth / spriteWidth) / 256
                     #the conditions in the if are:
                     ##1) it's in front of camera plane so you don't see things behind you
@@ -196,7 +199,7 @@ class WorldManager(object):
                     ##3) it's on the surface (right)
                     ##4) ZBuffer, with perpendicular distance
                     if(transformY > 0 and stripe > 0 and stripe < w and transformY < zBuffer[stripe]):
-                        surface.blit(pygame.transform.scale(self.sprites[sprite[2]+sprite[3]][texX], (1, spriteHeight)), (stripe, drawStartY))
+                        surface.blit(pygame.transform.scale(self.sprites[int(sprite[2]+sprite[3])][int(texX)], (1, int(spriteHeight))), (int(stripe), int(drawStartY)))
     
 
 class Camera(object):
